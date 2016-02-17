@@ -1,0 +1,1 @@
+../../../CharlyBackend/CharlyBackend/podfiles/PartnerAPIManager.h
