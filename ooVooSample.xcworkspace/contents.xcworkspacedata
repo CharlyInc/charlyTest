@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ooVooSample.xcodeproj">
+      location = "group:/Users/o/Documents/workspaceiOs/charly/oovooPrototype/ooVooNoCocoaPods/oovoosdk-ios-2.2.0.72 2/sample/charlyTestooVoo.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

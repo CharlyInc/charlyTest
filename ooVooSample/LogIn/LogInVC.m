@@ -58,7 +58,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    _txt_userId.text = [self randomUser];
+    _txtDisplayName.text = [self randomUser];
     _txtDisplayName.text=[self returnSavedDisplayname];
     
     UIButton *btnLoging = [self.view viewWithTag:100];
@@ -67,7 +67,7 @@
    
 }
 - (void)viewDidDisappear:(BOOL)animated {
-    self.txt_userId.text = @"";
+    self.txtDisplayName.text = @"";
 }
 
 
@@ -113,7 +113,8 @@
     
     if ([self isUserIdEmpty])
         return;
-    [UserDefaults setObject:_txt_userId.text ForKey:UserDefault_UserId];
+    
+    [UserDefaults setObject:_txtDisplayName.text ForKey:UserDefault_UserId];
     [UserDefaults setObject:_txtDisplayName.text ForKey:UserDefault_DisplayName];
     
     [sender setEnabled:false];
@@ -121,7 +122,7 @@
     
    
 
-    [self.sdk.Account login:self.txt_userId.text
+    [self.sdk.Account login:self.txtDisplayName.text
                  completion:^(SdkResult *result) {
                      NSLog(@"result code=%d result description %@", result.Result, result.description);
                      [spinner stopAnimating];
@@ -144,16 +145,16 @@
 - (BOOL)isUserIdEmpty {
 
     // removing white space from start and end
-    if ([[self.txt_userId.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+    if ([[self.txtDisplayName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UserId Missing" message:@"Please enter userId " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
 
-        self.txt_userId.text = @"";
+        self.txtDisplayName.text = @"";
 
         return true;
     }
 
-    if (self.txt_userId.text.length < 6) {
+    if (self.txtDisplayName.text.length < 6) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Characters Missing" message:@"UserId Must contain at least 6 characters " delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
 
@@ -166,7 +167,7 @@
 
 - (void)onLogin:(BOOL)error {
     if (!error) {
-        [ActiveUserManager activeUser].userId = self.txt_userId.text;
+        [ActiveUserManager activeUser].userId = self.txtDisplayName.text;
         [ActiveUserManager activeUser].displayName = self.txtDisplayName.text;
 //        NSString * uuid = [[NSUUID UUID] UUIDString] ;
 //        NSString * token = [ActiveUserManager activeUser].token;
